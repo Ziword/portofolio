@@ -1026,4 +1026,14 @@ section {
 
 .card-text {
   font-size: 16px;
+  word-wrap: break-word;
+}
+
+.card-content {
+  transform: rotateY(-180deg);
+  padding: 20px;
+  text-align: center;
+  background-color: #ffffff;
+  max-height: 200px; /* set your desired maximum height */
+  overflow: auto; /* add this to enable scrolling if the text exceeds the maximum height */
 }

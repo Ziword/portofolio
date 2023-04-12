@@ -1037,3 +1037,30 @@ section {
   max-height: 200px; /* set your desired maximum height */
   overflow: auto; /* add this to enable scrolling if the text exceeds the maximum height */
 }
+
+/* Porto Section */
+#content-porto,
+#content-porto-detail {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#content-porto.hidden,
+#content-porto-detail.hidden {
+  opacity: 0;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.navbar-brand i {
+  margin-right: 0.5rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.navbar-brand:hover i {
+  transform: translateX(-5px);
+}

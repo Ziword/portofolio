@@ -1039,15 +1039,13 @@ section {
 }
 
 /* Porto Section */
-#content-porto,
-#content-porto-detail {
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-}
-
-#content-porto.hidden,
-#content-porto-detail.hidden {
+.hidden {
   opacity: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out;
 }
 
 .navbar-brand {

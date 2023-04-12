@@ -434,7 +434,7 @@
                       ><i class="bx bx-plus"></i
                     ></a>
                     <a
-                      onclick="replaceContentPorto('vb_timbangan.html')"
+                      onclick="showContentDetail('vb_timbangan.html')"
                       title="More Details"
                       style="cursor: pointer"
                       ><i class="bx bx-link"></i
@@ -459,7 +459,7 @@
                       ><i class="bx bx-plus"></i
                     ></a>
                     <a
-                      onclick="replaceContentPorto('vb_timbangan.html')"
+                      onclick="showContentDetail('vb_timbangan.html')"
                       title="More Details"
                       style="cursor: pointer"
                       ><i class="bx bx-link"></i
@@ -484,7 +484,7 @@
                       ><i class="bx bx-plus"></i
                     ></a>
                     <a
-                      onclick="replaceContentPorto('vb_security.html')"
+                      onclick="showContentDetail('vb_security.html')"
                       title="More Details"
                       style="cursor: pointer"
                       ><i class="bx bx-link"></i
@@ -512,7 +512,7 @@
                       ><i class="bx bx-plus"></i
                     ></a>
                     <a
-                      onclick="replaceContentPorto('android_mantap.html')"
+                      onclick="showContentDetail('android_mantap.html')"
                       title="More Details"
                       style="cursor: pointer"
                       ><i class="bx bx-link"></i
@@ -537,7 +537,7 @@
                       ><i class="bx bx-plus"></i
                     ></a>
                     <a
-                      onclick="replaceContentPorto('android_doit.html')"
+                      onclick="showContentDetail('android_doit.html')"
                       title="More Details"
                       style="cursor: pointer"
                       ><i class="bx bx-link"></i
@@ -562,7 +562,7 @@
                       ><i class="bx bx-plus"></i
                     ></a>
                     <a
-                      onclick="replaceContentPorto('android_prit.html')"
+                      onclick="showContentDetail('android_prit.html')"
                       title="More Details"
                       style="cursor: pointer"
                       ><i class="bx bx-link"></i
@@ -573,7 +573,7 @@
               <!-- End of Android App -->
             </div>
           </div>
-          <div id="content-porto-detail"></div>
+          <div id="content-porto-detail" class="hidden"></div>
         </div>
       </section>
       <!-- End Portfolio Section -->
@@ -699,31 +699,42 @@
 
     <!-- Custom JS -->
     <script>
-      window.onload = function () {
-        replaceContentPorto();
-      };
-      function replaceContentPorto(content_id = "") {
+      async function showContentDetail(content_id = "") {
+        // menyembunyikan div content dan menampilkan div content-detail
         const content = document.querySelector("#content-porto");
         const content_detail = document.querySelector("#content-porto-detail");
-        if (content_id) {
-          content.classList.add("hidden");
-          content.style.display = "none";
-          fetch(`assets/porto_content/${content_id}`)
-            .then((response) => response.text())
-            .then((data) => {
-              setTimeout(() => {
-                content_detail.innerHTML = data;
-                content_detail.classList.remove("hidden");
-              }, 500);
-            });
-        } else {
-          setTimeout(() => {
-            content_detail.innerHTML = "";
-            content_detail.classList.add("hidden");
-            content.style.display = "block";
-            content.classList.remove("hidden");
-          }, 500);
-        }
+
+        // Load data from server
+        content.classList.add("hidden");
+        // load content detail
+        const response = await fetch(`assets/porto_content/${content_id}`);
+        const data = await response.text();
+        content_detail.innerHTML = data;
+        content_detail.classList.remove("hidden");
+
+        new Swiper(".portfolio-details-slider", {
+          speed: 400,
+          loop: true,
+          autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: ".swiper-pagination",
+            type: "bullets",
+            clickable: true,
+          },
+        });
+      }
+
+      function hideContentDetail() {
+        // menghapus isi dari div content-detail dan menyembunyikannya
+        const content = document.querySelector("#content-porto");
+        const content_detail = document.querySelector("#content-porto-detail");
+
+        content_detail.classList.add("hidden");
+        // show content
+        content.classList.remove("hidden");
       }
       const form = document.getElementById("php-email-form");
       form.addEventListener("submit", (event) => {
